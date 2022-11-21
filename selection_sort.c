@@ -5,7 +5,7 @@
 int main()
 {
     // Define array size
-    int array_size, i, j, min_index;
+    int array_size, i, j;
     printf("How many numbers do you want to sort? : ");
     scanf("%d", &array_size);
     float a[array_size], temp;
@@ -17,34 +17,26 @@ int main()
         scanf("%f", &a[i]);
     }
 
+    printf("\nIn ascending order :\n");
     // Sort
-    for(i = 0; i < array_size - 1; i++)
+    for(i = 0; i < array_size; i++)
     {
-        // comparasion of i indexed element with the rest of elements
-        min_index = i;
-        j = i + 1;
-
-        for(j; j < array_size; j++)
+        // comparasion between i indexed element and i + 1 indexed element
+        for(j = i + 1; j < array_size; j++)
         {
-            if ( a[j] < a[min_index] )
+            if ( a[j] < a[i] )
             {
-                min_index = j;
+                temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
             }
         }
 
-        // swap
-        temp = a[i];
-        a[i] = a[min_index];
-        a[min_index] = temp;
-    }
-
-    // print the sorted array
-    printf("\nIn ascending order :\n");
-    for ( i = 0; i < array_size; i++)
-    {
+        // print the sorted array
         printf("%.2f\t", a[i]);
     }
 
     printf("\n\n");
     return 0;
+
 }
