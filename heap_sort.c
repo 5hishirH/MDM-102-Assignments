@@ -1,15 +1,16 @@
-// Illustrate max heap
+// Heap sort
 
 #include<stdio.h>
 
 int main()
 {
-    int array_size, largest, left, right, i, count, temp;
-
-    printf("How many number do you want to convert into max heap structure? : ");
+    int array_size, largest, left, right, i, last_index;
+    // array size
+    printf("How many number do you want to sort? : ");
     scanf("%d", &array_size);
-    float arr[array_size], ts;
+    float arr[array_size], temp;
 
+    // input array
     printf("\n");
     for ( i = 0; i < array_size; i++)
     {
@@ -24,35 +25,34 @@ int main()
     printf("\n");
 
     // sort in ascending order
-    for(count = array_size - 1; count > 0; count--)
+    for(last_index = array_size - 1; last_index > 0; last_index--)
     {
-        // Build max heap
-        for ( i = 0; i <= count; i++)
+        // Heapify
+        for ( i = 0; i <= last_index; i++)
         {
             largest = i;
-            temp = largest;
-            left = 2*temp + 1;
-            right = 2*temp + 2;
-            if ( left <= count && arr[largest] < arr[left] )
+            left = 2*i + 1;
+            right = 2*i + 2;
+            if ( left <= last_index && arr[largest] < arr[left] )
                 largest = left;
-            if ( right <= count && arr[largest] < arr[right] )
+            if ( right <= last_index && arr[largest] < arr[right] )
                 largest = right;
-            if ( largest != temp )
+            if ( largest != i )
             {
-                ts = arr[temp];
-                arr[temp] = arr[largest];
-                arr[largest] = ts;
+                temp = arr[i];
+                arr[i] = arr[largest];
+                arr[largest] = temp;
             }
         }
 
         // swap
-        ts = arr[0];
-        arr[0] = arr[count];
-        arr[count] = ts;
+        temp = arr[0];
+        arr[0] = arr[last_index];
+        arr[last_index] = temp;
     }
 
     // print the heap sorted array
-    printf("\nMax heap sorted array :\n");
+    printf("\nAscending :\n");
     for(i = 0; i < array_size; i++)
         printf("%.2f\t", arr[i]);
 
